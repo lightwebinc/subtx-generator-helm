@@ -1,0 +1,150 @@
+# Default values for bitcoin-subtx-generator.
+#
+# The application is a set of CLI tools (subtx-gen, send-anchor-frame,
+# send-block-announce, send-subtree-data). The chart selects which binary to
+# run via `mode` and translates the matching args block into the container's
+# command. Binaries accept flags only — there are no environment variables.
+
+# Binary selector — choose one of:
+#   subtx-gen            traffic generator (BRC-124/128 frames)
+#   send-anchor-frame    BRC-134 anchor tx sender
+#   send-block-announce  BRC-131 block/coinbase announcements
+#   send-subtree-data    BRC-132 subtree data sender
+mode: "subtx-gen"
+
+# Deployment | Job
+#   Use Job for finite load runs that terminate on completion.
+#   Use Deployment for continuous generators (subtx-gen with duration=0).
+workloadType: "Deployment"
+
+replicaCount: 1
+
+image:
+  repository: ghcr.io/lightwebinc/bitcoin-subtx-generator
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  name: ""
+  annotations: {}
+
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+securityContext: {}
+
+# Pure UDP/TCP client — does not require fabric NIC access.
+# `pod` = default primary CNI; `host` = hostNetwork; `multus` available
+# if the operator wants the generator to bind a specific fabric NIC.
+networking:
+  mode: pod
+  multus:
+    networkName: mcast-fabric
+    namespace: bitcoin-mcast
+    fabricIPv6: ""
+    interface: net1
+  host:
+    dnsPolicy: ClusterFirstWithHostNet
+
+# Args shared by all binaries.
+# Empty string / 0 means "omit this flag" (binary default applies).
+args:
+  addr: "[::1]:9000"
+
+# Per-mode args. Only the block matching `.Values.mode` is rendered.
+# Each key maps directly to the binary's flag of the same kebab-case name.
+
+# subtx-gen — full traffic generator
+subtxGen:
+  frameVersion: 2
+  shardBits: 2
+  subtrees: 8
+  subtreeSeed: "bitcoin-subtx-generator-default"
+  pps: 1000
+  duration: "10s"
+  count: 0
+  workers: 0
+  payloadSize: 512
+  payloadFormat: "brc124"   # brc124 | brc128 | mixed
+  seqStart: 1
+  seqGapEvery: 0
+  seqGapSize: 1
+  seqGapDelay: "0s"
+  logInterval: "1s"
+  printSubtrees: false
+  subtreeGroup: ""
+  announceAddr: ""
+  announceInterval: "10s"
+  announceTtl: 0
+  announcePhaseSize: 0
+  announcePhaseInterval: "0s"
+  corruptTxidRate: 0
+
+# send-anchor-frame — BRC-134 anchors
+sendAnchorFrame:
+  count: 10
+  payloadSize: 256
+  interval: "50ms"
+  tcp: false
+
+# send-block-announce — BRC-131 block + coinbase pairs
+sendBlockAnnounce:
+  # addr default for this binary is [::1]:9002 (proxy TCP). Override via args.addr.
+  blocks: 10
+  subtrees: 4
+  interval: "100ms"
+  coinbase: true
+
+# send-subtree-data — BRC-132 subtree data
+sendSubtreeData:
+  frames: 20
+  msgType: "hashes"         # hashes | full
+  nodes: 16
+  payloadSize: 0
+  subtreeCount: 0
+  interval: "50ms"
+
+job:
+  completions: 1
+  parallelism: 1
+  backoffLimit: 0
+  ttlSecondsAfterFinished: 600
+
+# Metrics: subtx-gen binaries do not currently expose an HTTP /metrics
+# endpoint. metrics.enabled is provided for parity / future use.
+service:
+  type: ClusterIP
+  metricsPort: 0
+
+metrics:
+  enabled: false
+  path: /metrics
+  port: 0
+
+probes:
+  readiness:
+    enabled: false
+  liveness:
+    enabled: false
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
+priorityClassName: ""
+topologySpreadConstraints: []
+
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1
+
+networkPolicy:
+  enabled: false
+  ingressFrom: []
+
+extraEnv: []

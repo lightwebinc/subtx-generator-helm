@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bitcoin-subtx-generator values",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": ["subtx-gen", "send-anchor-frame", "send-block-announce", "send-subtree-data"]
+    },
+    "workloadType": { "type": "string", "enum": ["Deployment", "Job"] },
+    "replicaCount": { "type": "integer", "minimum": 0 },
+    "image": {
+      "type": "object",
+      "properties": {
+        "repository": { "type": "string", "minLength": 1 },
+        "pullPolicy": { "type": "string", "enum": ["Always", "IfNotPresent", "Never"] }
+      }
+    },
+    "networking": {
+      "type": "object",
+      "properties": {
+        "mode": { "type": "string", "enum": ["pod", "host", "multus"] }
+      }
+    },
+    "subtxGen": {
+      "type": "object",
+      "properties": {
+        "shardBits":     { "type": "integer", "minimum": 1, "maximum": 15 },
+        "frameVersion":  { "type": "integer", "minimum": 1, "maximum": 2 },
+        "payloadFormat": { "type": "string", "enum": ["brc124", "brc128", "mixed"] },
+        "corruptTxidRate": { "type": "integer", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "sendSubtreeData": {
+      "type": "object",
+      "properties": {
+        "msgType": { "type": "string", "enum": ["hashes", "full"] }
+      }
+    }
+  }
+}
