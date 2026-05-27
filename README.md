@@ -1,8 +1,8 @@
-# bitcoin-subtx-generator Helm chart
+# subtx-generator Helm chart
 
-Helm chart for [bitcoin-subtx-generator](https://github.com/lightwebinc/bitcoin-subtx-generator) — the BSV multicast load and control-frame tooling.
+Helm chart for [subtx-generator](https://github.com/lightwebinc/subtx-generator) — the BSV multicast load and control-frame tooling.
 
-This repository packages templates, default values, JSON Schema validation, and CI workflows for the generator. The application source lives in [`bitcoin-subtx-generator`](https://github.com/lightwebinc/bitcoin-subtx-generator).
+This repository packages templates, default values, JSON Schema validation, and CI workflows for the generator. The application source lives in [`subtx-generator`](https://github.com/lightwebinc/subtx-generator).
 
 ## Modes
 
@@ -21,14 +21,14 @@ The binaries accept **CLI flags only** (no environment variables). The chart tra
 
 ```bash
 # Continuous traffic generator (Deployment) — emits 1000 pps until killed
-helm install gen oci://ghcr.io/lightwebinc/charts/bitcoin-subtx-generator \
-  --version 0.1.0 -n bitcoin-mcast \
+helm install gen oci://ghcr.io/lightwebinc/charts/subtx-generator \
+  --version 0.1.0 -n bsv-mcast \
   --set mode=subtx-gen \
   --set args.addr=[fd20::20]:9000 \
   --set subtxGen.pps=1000 --set subtxGen.duration=0s
 
 # Finite load test (Job) — send 10 anchor frames then exit
-helm install anchor-test . -n bitcoin-mcast \
+helm install anchor-test . -n bsv-mcast \
   --set mode=send-anchor-frame \
   --set workloadType=Job \
   --set args.addr=[fd20::20]:9000 \

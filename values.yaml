@@ -1,4 +1,4 @@
-# Default values for bitcoin-subtx-generator.
+# Default values for subtx-generator.
 #
 # The application is a set of CLI tools (subtx-gen, send-anchor-frame,
 # send-block-announce, send-subtree-data). The chart selects which binary to
@@ -20,7 +20,7 @@ workloadType: "Deployment"
 replicaCount: 1
 
 image:
-  repository: ghcr.io/lightwebinc/bitcoin-subtx-generator
+  repository: ghcr.io/lightwebinc/subtx-generator
   pullPolicy: IfNotPresent
   tag: ""
 
@@ -45,7 +45,7 @@ networking:
   mode: pod
   multus:
     networkName: mcast-fabric
-    namespace: bitcoin-mcast
+    namespace: bsv-mcast
     fabricIPv6: ""
     interface: net1
   host:
@@ -64,7 +64,7 @@ subtxGen:
   frameVersion: 2
   shardBits: 2
   subtrees: 8
-  subtreeSeed: "bitcoin-subtx-generator-default"
+  subtreeSeed: "subtx-generator-default"
   pps: 1000
   duration: "10s"
   count: 0

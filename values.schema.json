@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "bitcoin-subtx-generator values",
+  "title": "subtx-generator values",
   "type": "object",
   "additionalProperties": true,
   "properties": {

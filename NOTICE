@@ -1,11 +1,11 @@
-bitcoin-subtx-generator-helm
+subtx-generator-helm
 Copyright 2026 Lightweb Inc. (https://lightweb.net)
 
 =========================================================================
 
 This repository contains the Helm chart for deploying the
-bitcoin-subtx-generator load and control-frame tooling on Kubernetes.
+subtx-generator load and control-frame tooling on Kubernetes.
 The chart packages templates, default values, and CI workflows; the
-application source lives in the bitcoin-subtx-generator repository.
+application source lives in the subtx-generator repository.
 
 =========================================================================

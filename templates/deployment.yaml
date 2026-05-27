@@ -2,28 +2,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "bitcoin-subtx-generator.fullname" . }}
+  name: {{ include "subtx-generator.fullname" . }}
   labels:
-    {{- include "bitcoin-subtx-generator.labels" . | nindent 4 }}
+    {{- include "subtx-generator.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "bitcoin-subtx-generator.selectorLabels" . | nindent 6 }}
+      {{- include "subtx-generator.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
         {{- if eq .Values.networking.mode "multus" }}
-        {{- include "bitcoin-subtx-generator.multusAnnotation" . | nindent 8 }}
+        {{- include "subtx-generator.multusAnnotation" . | nindent 8 }}
         {{- end }}
         {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
       labels:
-        {{- include "bitcoin-subtx-generator.selectorLabels" . | nindent 8 }}
+        {{- include "subtx-generator.selectorLabels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      {{- include "bitcoin-subtx-generator.podSpec" . | nindent 6 }}
+      {{- include "subtx-generator.podSpec" . | nindent 6 }}
 {{- end }}
