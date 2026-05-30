@@ -29,7 +29,14 @@
         "shardBits":     { "type": "integer", "minimum": 1, "maximum": 15 },
         "frameVersion":  { "type": "integer", "minimum": 1, "maximum": 2 },
         "payloadFormat": { "type": "string", "enum": ["brc124", "brc128", "mixed"] },
-        "corruptTxidRate": { "type": "integer", "minimum": 0, "maximum": 100 }
+        "corruptTxidRate": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "mode":          { "type": "string", "enum": ["unicast", "direct-multicast"] },
+        "bindSource":    { "type": "string" },
+        "egressIface":   { "type": "string" },
+        "sourceMode":    { "type": "string", "enum": ["asm", "ssm"] },
+        "scope":         { "type": "string", "enum": ["site", "global"] },
+        "mcGroupId":     { "type": "string" },
+        "egressPort":    { "type": "integer", "minimum": 1, "maximum": 65535 }
       }
     },
     "sendSubtreeData": {

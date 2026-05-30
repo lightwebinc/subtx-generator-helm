@@ -84,6 +84,17 @@ subtxGen:
   announcePhaseSize: 0
   announcePhaseInterval: "0s"
   corruptTxidRate: 0
+  # Direct-multicast mode (skips the proxy and emits directly). When set
+  # to "direct-multicast" the generator MUST be configured with
+  # bindSource (unique IPv6 per replica), egressIface, and a sourceMode/
+  # scope pair that resolves to the same prefix listeners join.
+  mode: "unicast"           # unicast | direct-multicast
+  bindSource: ""            # IPv6 literal; required when mode=direct-multicast
+  egressIface: ""           # outbound NIC for multicast egress (host or multus NIC name)
+  sourceMode: "asm"         # asm | ssm
+  scope: "site"             # site | global
+  mcGroupId: "0x000B"
+  egressPort: 9001
 
 # send-anchor-frame — BRC-134 anchors
 sendAnchorFrame:

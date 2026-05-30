@@ -117,6 +117,13 @@ to avoid relying on regex backreference behaviour across Sprig versions.
 {{- include "subtx-generator.emitFlag" (dict "name" "announce-phase-size"   "v" $a.announcePhaseSize) -}}
 {{- include "subtx-generator.emitFlag" (dict "name" "announce-phase-interval" "v" $a.announcePhaseInterval) -}}
 {{- include "subtx-generator.emitFlag" (dict "name" "corrupt-txid-rate"     "v" $a.corruptTxidRate) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "mode"                  "v" $a.mode) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "bind-source"           "v" $a.bindSource) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "egress-iface"          "v" $a.egressIface) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "source-mode"           "v" $a.sourceMode) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "scope"                 "v" $a.scope) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "mc-group-id"           "v" $a.mcGroupId) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "egress-port"           "v" $a.egressPort) -}}
 {{- else if eq .Values.mode "send-anchor-frame" -}}
 {{- $a := .Values.sendAnchorFrame -}}
 {{- include "subtx-generator.emitFlag" (dict "name" "count"        "v" $a.count) -}}
