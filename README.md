@@ -51,10 +51,23 @@ The generator is a pure UDP/TCP client toward the proxy — no MLD join, no mult
 See [`values.yaml`](values.yaml). Every flag of every binary is exposed under per-mode blocks:
 
 - `args` — shared flags (`addr`)
-- `subtxGen` — full `subtx-gen` surface (frame version, payload format, gap injection, BRC-127 announce, txid corruption)
+- `subtxGen` — full `subtx-gen` surface (frame version, payload format, gap injection, BRC-127 announce, txid corruption, direct-multicast SSM mode)
 - `sendAnchorFrame` — BRC-134 sender
 - `sendBlockAnnounce` — BRC-131 sender
 - `sendSubtreeData` — BRC-132 sender
+
+### direct-multicast mode (subtxGen)
+
+`subtxGen.mode` defaults to `unicast` (forward to proxy via `args.addr`).
+Set `subtxGen.mode=direct-multicast` plus `subtxGen.bindSource`,
+`subtxGen.egressIface`, `subtxGen.sourceMode`, `subtxGen.scope`, and
+`subtxGen.egressPort` to bypass the proxy and emit `(S=bindSource, G)`
+directly. The generator stamps SeqNum per-flow and HashKey =
+XXH64(bindSource ∥ groupIdx ∥ subtreeID) so SSM listeners see
+deterministic flows without a proxy in the loop. Operators MUST add
+`bindSource` to the shard-manifest `publishers` list so receivers'
+`(S,G)` joins include this generator. See the
+[SSM Support Plan](https://github.com/lightwebinc/bsv-multicast/blob/main/docs/SourceSpecificMulticast/ssm-support-plan.md).
 
 ## Release
 
