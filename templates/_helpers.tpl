@@ -181,10 +181,12 @@ containers:
     command: ["/{{ .Values.mode }}"]
     args:
       {{- include "subtx-generator.args" . | nindent 6 }}
-    {{- with .Values.extraEnv }}
     env:
+      - name: LOG_FORMAT
+        value: {{ .Values.logFormat | default "text" | quote }}
+      {{- with .Values.extraEnv }}
       {{- toYaml . | nindent 6 }}
-    {{- end }}
+      {{- end }}
     {{- with .Values.resources }}
     resources:
       {{- toYaml . | nindent 6 }}

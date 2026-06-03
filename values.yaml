@@ -158,4 +158,9 @@ networkPolicy:
   enabled: false
   ingressFrom: []
 
+# Unified logging output format for subtx-generator's structured logs.
+# text (stderr) | json (stdout, matching the rest of the fleet).
+# See bsv-multicast/docs/UnifiedLogging/unified-logging-plan.md
+logFormat: "text"
+
 extraEnv: []

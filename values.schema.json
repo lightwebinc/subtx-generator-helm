@@ -9,6 +9,7 @@
       "enum": ["subtx-gen", "send-anchor-frame", "send-block-announce", "send-subtree-data"]
     },
     "workloadType": { "type": "string", "enum": ["Deployment", "Job"] },
+    "logFormat": { "type": "string", "enum": ["text", "json"] },
     "replicaCount": { "type": "integer", "minimum": 0 },
     "image": {
       "type": "object",

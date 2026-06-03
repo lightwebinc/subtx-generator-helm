@@ -55,6 +55,7 @@ See [`values.yaml`](values.yaml). Every flag of every binary is exposed under pe
 - `sendAnchorFrame` — BRC-134 sender
 - `sendBlockAnnounce` — BRC-131 sender
 - `sendSubtreeData` — BRC-132 sender
+- `logFormat` (`text`|`json`, schema-validated) → `LOG_FORMAT`: the generator now logs through `shard-common/logging`; set `json` to match the rest of the fleet. See the [Unified Logging Plan](https://github.com/lightwebinc/bsv-multicast/blob/main/docs/UnifiedLogging/unified-logging-plan.md).
 
 ### direct-multicast mode (subtxGen)
 
