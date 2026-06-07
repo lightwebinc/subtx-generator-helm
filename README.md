@@ -1,5 +1,7 @@
 # subtx-generator Helm chart
 
+> Part of the [**BSV Layered Multicast**](https://github.com/lightwebinc/bsv-multicast) open-source project — see the main repository for the full architecture, design docs, and BRC specifications.
+
 Helm chart for [subtx-generator](https://github.com/lightwebinc/subtx-generator) — the BSV multicast load and control-frame tooling.
 
 This repository packages templates, default values, JSON Schema validation, and CI workflows for the generator. The application source lives in [`subtx-generator`](https://github.com/lightwebinc/subtx-generator).
