@@ -70,7 +70,7 @@ XXH64(bindSource ∥ groupIdx ∥ subtreeID) so SSM listeners see
 deterministic flows without a proxy in the loop. Operators MUST add
 `bindSource` to the shard-manifest `publishers` list so receivers'
 `(S,G)` joins include this generator. See the
-[SSM Support Plan](https://github.com/lightwebinc/bsv-multicast/blob/main/docs/SourceSpecificMulticast/ssm-support-plan.md).
+[SSM Support Plan](https://github.com/lightwebinc/bsv-multicast/blob/main/DESIGN.md#source-specific-multicast-ssm).
 
 ## Release
 
