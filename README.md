@@ -24,7 +24,7 @@ The binaries accept **CLI flags only** (no environment variables). The chart tra
 ```bash
 # Continuous traffic generator (Deployment) — emits 1000 pps until killed
 helm install gen oci://ghcr.io/lightwebinc/charts/subtx-generator \
-  --version 0.1.0 -n bsv-mcast \
+  --version 0.2.1 -n bsv-mcast \
   --set mode=subtx-gen \
   --set args.addr=[fd20::20]:9000 \
   --set subtxGen.pps=1000 --set subtxGen.duration=0s
