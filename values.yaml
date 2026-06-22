@@ -91,7 +91,7 @@ subtxGen:
   mode: "unicast"           # unicast | direct-multicast
   bindSource: ""            # IPv6 literal; required when mode=direct-multicast
   egressIface: ""           # outbound NIC for multicast egress (host or multus NIC name)
-  sourceMode: "asm"         # asm | ssm
+  sourceMode: "ssm"         # asm | ssm
   scope: "site"             # site | global
   mcGroupId: "0x000B"
   egressPort: 9001

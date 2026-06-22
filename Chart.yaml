@@ -2,7 +2,7 @@ apiVersion: v2
 name: subtx-generator
 description: Load and control-frame generator for the BSV multicast pipeline
 type: application
-version: 0.2.1
+version: 0.2.2
 # appVersion MUST equal a tag published on ghcr.io/lightwebinc/subtx-generator
 # (the chart's tag:"" default pulls this). Images are published manually via the
 # binary repo's image-publish.yml workflow; bump appVersion ONLY in lockstep with
