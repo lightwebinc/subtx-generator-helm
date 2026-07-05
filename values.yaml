@@ -66,7 +66,7 @@ subtxGen:
   subtrees: 8
   subtreeSeed: "subtx-generator-default"
   pps: 1000
-  duration: "10s"
+  duration: "0s"   # 0 = continuous (Deployment default; binary default since v0.2.4). Set finite for Job runs.
   count: 0
   workers: 0
   payloadSize: 512
@@ -160,7 +160,7 @@ networkPolicy:
 
 # Unified logging output format for subtx-generator's structured logs.
 # text (stderr) | json (stdout, matching the rest of the fleet).
-# See bsv-multicast/docs/UnifiedLogging/unified-logging-plan.md
+# See https://github.com/lightwebinc/shard-common/blob/main/docs/logging.md
 logFormat: "text"
 
 extraEnv: []
