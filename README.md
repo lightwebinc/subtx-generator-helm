@@ -26,14 +26,14 @@ The binaries accept **CLI flags only** (no environment variables). The chart tra
 helm install gen oci://ghcr.io/lightwebinc/charts/subtx-generator \
   --version 0.3.0 -n bsv-mcast \
   --set mode=subtx-gen \
-  --set args.addr=[fd20::20]:9000 \
+  --set args.addr=[fd20::20]:8725 \
   --set subtxGen.pps=1000 --set subtxGen.duration=0s
 
 # Finite load test (Job) — send 10 anchor frames then exit
 helm install anchor-test . -n bsv-mcast \
   --set mode=send-anchor-frame \
   --set workloadType=Job \
-  --set args.addr=[fd20::20]:9000 \
+  --set args.addr=[fd20::20]:8725 \
   --set sendAnchorFrame.count=10
 ```
 
@@ -50,7 +50,7 @@ The generator is a pure UDP/TCP client toward the proxy — no MLD join, no mult
 
 ## Values reference
 
-See [`values.yaml`](values.yaml). Every flag of every binary is exposed under per-mode blocks:
+See [`values.yaml`](values.yaml). Every flag of the four packaged binaries is exposed under per-mode blocks (send-subtree-push and send-block-push are not yet packaged in the image):
 
 - `args` — shared flags (`addr`)
 - `subtxGen` — full `subtx-gen` surface (frame version, payload format, gap injection, BRC-127 announce, txid corruption, direct-multicast SSM mode)

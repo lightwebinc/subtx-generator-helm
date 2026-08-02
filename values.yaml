@@ -54,7 +54,7 @@ networking:
 # Args shared by all binaries.
 # Empty string / 0 means "omit this flag" (binary default applies).
 args:
-  addr: "[::1]:9000"
+  addr: "[::1]:8725"
 
 # Per-mode args. Only the block matching `.Values.mode` is rendered.
 # Each key maps directly to the binary's flag of the same kebab-case name.
