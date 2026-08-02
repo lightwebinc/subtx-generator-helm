@@ -178,7 +178,10 @@ containers:
     securityContext:
       {{- toYaml . | nindent 6 }}
     {{- end }}
-    command: ["/{{ .Values.mode }}"]
+    {{- /* Absolute path: the Dockerfile installs every binary into
+           /usr/local/bin, and the distroless image has no shell to fall
+           back on PATH resolution. */}}
+    command: ["/usr/local/bin/{{ .Values.mode }}"]
     args:
       {{- include "subtx-generator.args" . | nindent 6 }}
     env:
