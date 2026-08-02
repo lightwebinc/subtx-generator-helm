@@ -70,7 +70,10 @@ subtxGen:
   count: 0
   workers: 0
   payloadSize: 512
-  payloadFormat: "brc124"   # brc124 | brc128 | mixed
+  # brc128 | brc124 | mixed — brc128 (BRC-30 EF) is the default: the fabric is
+  # EF-native, and every payload is exactly one valid tx of payloadSize bytes
+  # (min 75 for brc128/mixed, 60 for brc124; below-minimum fails at startup).
+  payloadFormat: "brc128"
   seqStart: 1
   seqGapEvery: 0
   seqGapSize: 1
