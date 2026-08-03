@@ -12,10 +12,12 @@ The chart packages a single multi-binary image and selects the binary via `.Valu
 
 | mode | Binary | Purpose |
 |---|---|---|
-| `subtx-gen` (default) | `/subtx-gen` | BRC-124/BRC-128 traffic generator |
-| `send-anchor-frame` | `/send-anchor-frame` | BRC-134 anchor tx sender |
-| `send-block-announce` | `/send-block-announce` | BRC-131 block + coinbase announcements (TCP) |
-| `send-subtree-data` | `/send-subtree-data` | BRC-132 subtree data sender (TCP) |
+| `subtx-gen` (default) | `/usr/local/bin/subtx-gen` | BRC-124/BRC-128 traffic generator |
+| `send-anchor-frame` | `/usr/local/bin/send-anchor-frame` | BRC-134 anchor tx sender |
+| `send-block-announce` | `/usr/local/bin/send-block-announce` | BRC-131 block + coinbase announcements (TCP) |
+| `send-subtree-data` | `/usr/local/bin/send-subtree-data` | BRC-132 subtree data sender (TCP) |
+| `send-subtree-push` | `/usr/local/bin/send-subtree-push` | BRC-143 subtree push → proxy lane 8726 |
+| `send-block-push` | `/usr/local/bin/send-block-push` | BRC-144 block push → proxy lane 8727 |
 
 The binaries accept **CLI flags only** (no environment variables). The chart translates the matching `*Args` block from `values.yaml` into the container's `command` and `args`. Zero / empty values are omitted so the binary defaults apply.
 
@@ -24,7 +26,7 @@ The binaries accept **CLI flags only** (no environment variables). The chart tra
 ```bash
 # Continuous traffic generator (Deployment) — emits 1000 pps until killed
 helm install gen oci://ghcr.io/lightwebinc/charts/subtx-generator \
-  --version 0.3.0 -n bsv-mcast \
+  --version 0.3.2 -n bsv-mcast \
   --set mode=subtx-gen \
   --set args.addr=[fd20::20]:8725 \
   --set subtxGen.pps=1000 --set subtxGen.duration=0s
@@ -50,13 +52,15 @@ The generator is a pure UDP/TCP client toward the proxy — no MLD join, no mult
 
 ## Values reference
 
-See [`values.yaml`](values.yaml). Every flag of the four packaged binaries is exposed under per-mode blocks (send-subtree-push and send-block-push are not yet packaged in the image):
+See [`values.yaml`](values.yaml). Every flag of the six packaged binaries is exposed under per-mode blocks:
 
 - `args` — shared flags (`addr`)
 - `subtxGen` — full `subtx-gen` surface (frame version, payload format, gap injection, BRC-127 announce, txid corruption, direct-multicast SSM mode)
 - `sendAnchorFrame` — BRC-134 sender
 - `sendBlockAnnounce` — BRC-131 sender
 - `sendSubtreeData` — BRC-132 sender
+- `sendSubtreePush` — BRC-143 subtree push (proxy lane 8726)
+- `sendBlockPush` — BRC-144 block push (proxy lane 8727)
 - `logFormat` (`text`|`json`, schema-validated) → `LOG_FORMAT`: the generator now logs through `shard-common/logging`; set `json` to match the rest of the fleet. See the [Unified Logging Plan](https://github.com/lightwebinc/shard-common/blob/main/docs/logging.md).
 
 ### direct-multicast mode (subtxGen)

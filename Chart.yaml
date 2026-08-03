@@ -2,7 +2,7 @@ apiVersion: v2
 name: subtx-generator
 description: Load and control-frame generator for the BSV multicast pipeline
 type: application
-version: 0.3.1
+version: 0.3.2
 # appVersion MUST equal a tag published on ghcr.io/lightwebinc/subtx-generator
 # (the chart's tag:"" default pulls this). Images are published manually via the
 # binary repo's image-publish.yml workflow; bump appVersion ONLY in lockstep with
@@ -32,3 +32,7 @@ annotations:
   artifacthub.io/changes: |
     - kind: changed
       description: subtxGen.payloadFormat default brc128 (BRC-30 EF) — the fabric is EF-native; pin brc124 explicitly for raw-tx lanes
+    - kind: added
+      description: send-subtree-push / send-block-push modes (BRC-143/144 push lanes) — now packaged in the image
+    - kind: fixed
+      description: command path is /usr/local/bin/<mode>; the previous /<mode> did not exist in the image

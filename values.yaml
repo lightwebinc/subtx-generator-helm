@@ -123,6 +123,31 @@ sendSubtreeData:
   subtreeCount: 0
   interval: "50ms"
 
+# send-subtree-push — BRC-143 subtree push objects.
+# Targets the proxy's privileged subtree lane (-subtree-listen-port, standard
+# 8726), which must be enabled and reachable from this pod. Set args.addr.
+sendSubtreePush:
+  count: 10
+  interval: "100ms"
+  duration: "0s"
+  nodes: 16
+  coinbasePlaceholder: true  # first subtree of a block carries the 0xFF×32 leaf
+  seed: 0
+  logHashes: false
+
+# send-block-push — BRC-144 block push objects.
+# Targets the proxy's privileged block lane (-block-listen-port, standard 8727).
+sendBlockPush:
+  count: 10
+  interval: "100ms"
+  duration: "0s"
+  subtrees: 4
+  coinbaseSize: 0
+  bumpSize: 0
+  heightStart: 0
+  seed: 0
+  logHashes: false
+
 job:
   completions: 1
   parallelism: 1

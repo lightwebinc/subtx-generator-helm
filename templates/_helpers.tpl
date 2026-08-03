@@ -144,6 +144,26 @@ to avoid relying on regex backreference behaviour across Sprig versions.
 {{- include "subtx-generator.emitFlag" (dict "name" "payload-size"  "v" $a.payloadSize) -}}
 {{- include "subtx-generator.emitFlag" (dict "name" "subtree-count" "v" $a.subtreeCount) -}}
 {{- include "subtx-generator.emitFlag" (dict "name" "interval"      "v" $a.interval) -}}
+{{- else if eq .Values.mode "send-subtree-push" -}}
+{{- $a := .Values.sendSubtreePush -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "count"                "v" $a.count) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "interval"             "v" $a.interval) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "duration"             "v" $a.duration) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "nodes"                "v" $a.nodes) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "coinbase-placeholder" "v" $a.coinbasePlaceholder) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "seed"                 "v" $a.seed) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "log-hashes"           "v" $a.logHashes) -}}
+{{- else if eq .Values.mode "send-block-push" -}}
+{{- $a := .Values.sendBlockPush -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "count"         "v" $a.count) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "interval"      "v" $a.interval) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "duration"      "v" $a.duration) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "subtrees"      "v" $a.subtrees) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "coinbase-size" "v" $a.coinbaseSize) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "bump-size"     "v" $a.bumpSize) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "height-start"  "v" $a.heightStart) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "seed"          "v" $a.seed) -}}
+{{- include "subtx-generator.emitFlag" (dict "name" "log-hashes"    "v" $a.logHashes) -}}
 {{- end -}}
 {{- end -}}
 
