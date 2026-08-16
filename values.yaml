@@ -1,15 +1,18 @@
 # Default values for subtx-generator.
 #
 # The application is a set of CLI tools (subtx-gen, send-anchor-frame,
-# send-block-announce, send-subtree-data). The chart selects which binary to
-# run via `mode` and translates the matching args block into the container's
-# command. Binaries accept flags only — there are no environment variables.
+# send-block-announce, send-subtree-data, send-subtree-push, send-block-push).
+# The chart selects which binary to run via `mode` and translates the matching
+# args block into the container's command. Binaries accept flags only — there
+# are no environment variables.
 
 # Binary selector — choose one of:
 #   subtx-gen            traffic generator (BRC-124/128 frames)
 #   send-anchor-frame    BRC-134 anchor tx sender
 #   send-block-announce  BRC-131 block/coinbase announcements
 #   send-subtree-data    BRC-132 subtree data sender
+#   send-subtree-push    BRC-143 subtree push sender (image v0.2.10+)
+#   send-block-push      BRC-144 block push sender (image v0.2.10+)
 mode: "subtx-gen"
 
 # Deployment | Job

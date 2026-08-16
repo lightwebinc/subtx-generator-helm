@@ -19,6 +19,8 @@ keywords:
   - brc-131
   - brc-132
   - brc-134
+  - brc-143
+  - brc-144
 home: https://github.com/lightwebinc/subtx-generator
 sources:
   - https://github.com/lightwebinc/subtx-generator
@@ -33,6 +35,6 @@ annotations:
     - kind: changed
       description: subtxGen.payloadFormat default brc128 (BRC-30 EF) — the fabric is EF-native; pin brc124 explicitly for raw-tx lanes
     - kind: added
-      description: send-subtree-push / send-block-push modes (BRC-143/144 push lanes) — now packaged in the image
+      description: send-subtree-push / send-block-push modes (BRC-143/144 push lanes) — require image.tag set to an image built from v0.2.10+; the default appVersion image does not contain these binaries
     - kind: fixed
       description: command path is /usr/local/bin/<mode>; the previous /<mode> did not exist in the image

@@ -4,7 +4,7 @@ Selected mode: {{ .Values.mode }}
 Target addr:   {{ .Values.args.addr }}
 
 Rendered CLI invocation:
-  /{{ .Values.mode }} \
+  /usr/local/bin/{{ .Values.mode }} \
 {{- include "subtx-generator.args" . | nindent 4 }}
 
 {{- if and (eq .Values.mode "subtx-gen") (not (kindIs "string" .Values.subtxGen.duration)) }}
