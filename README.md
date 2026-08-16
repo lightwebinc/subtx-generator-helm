@@ -19,7 +19,7 @@ The chart packages a single multi-binary image and selects the binary via `.Valu
 | `send-subtree-push` | `/usr/local/bin/send-subtree-push` | BRC-143 subtree push → proxy lane 8726 |
 | `send-block-push` | `/usr/local/bin/send-block-push` | BRC-144 block push → proxy lane 8727 |
 
-The `send-subtree-push` / `send-block-push` binaries are only packaged in images built from `v0.2.10` or later; the chart's default image (`appVersion`) predates them, so these modes require an explicit `image.tag` override to a `v0.2.10+` build.
+The `send-subtree-push` / `send-block-push` binaries are packaged in images built from `v0.2.10` on — the chart's default image (`appVersion`) includes them, along with `tunnel-sink`. Only an older explicit `image.tag` pin lacks them.
 
 The binaries accept **CLI flags only** (no environment variables). The chart translates the matching `*Args` block from `values.yaml` into the container's `command` and `args`. Zero / empty values are omitted so the binary defaults apply. Boolean `false` is likewise omitted, so flags whose binary default is `true` (`sendBlockAnnounce.coinbase`, `sendSubtreePush.coinbasePlaceholder`) cannot be disabled through the chart.
 
