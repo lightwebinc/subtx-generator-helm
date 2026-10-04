@@ -1,3 +1,5 @@
+> **Moved.** This chart now lives in [`lightwebinc/charts`](https://github.com/lightwebinc/charts/tree/main/charts/subtx-generator) under `charts/subtx-generator/`, with its full history. This repository is archived. Released versions are unchanged at `oci://ghcr.io/lightwebinc/charts/subtx-generator`.
+
 # subtx-generator Helm chart
 
 > Part of the [**BSV Layered Multicast**](https://github.com/lightwebinc/bsv-multicast) open-source project — see the main repository for the full architecture, design docs, and BRC specifications.
